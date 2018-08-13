@@ -33,8 +33,6 @@ SDL_Surface *SDL_LoadFarbfeldSurface(const char *filename) {
         return NULL;
     } 
 
-    printf("Header read\n");
-    
     width = ntohl(*(uint32_t*)&headbuf[8]);
     height = ntohl(*(uint32_t*)&headbuf[12]);
 
@@ -65,8 +63,8 @@ SDL_Surface *SDL_LoadFarbfeldSurface(const char *filename) {
 
     SDL_LockSurface(surf);
     
-    SDL_memset(surf->pixels, 0, width * height);
     memcpy(surf->pixels, pixbuf, (width * height * 4));
+
     SDL_UnlockSurface(surf);
 
     free(pixbuf);
